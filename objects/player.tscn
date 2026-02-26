@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://gji8ikoo6vlv"]
+
+[ext_resource type="Script" uid="uid://fp8dvmygfp0y" path="res://objects/player.gd" id="1_eqqp1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eqqp1"]
+size = Vector3(1.6, 3.6, 1.6)
+
+[node name="Player" type="CharacterBody3D" unique_id=1132778369]
+collision_layer = 2
+script = ExtResource("1_eqqp1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=123892853]
+shape = SubResource("BoxShape3D_eqqp1")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="Camera Pivot" type="Node3D" parent="." unique_id=2076540574]
+transform = Transform3D(-1, 0, -8.742277e-08, 0, 0.99999994, 0, 8.742278e-08, 0, -0.99999994, 0, 1.2, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Camera Pivot" unique_id=1239812023]
+current = true
+
+[node name="Block Finder Raycast" type="RayCast3D" parent="Camera Pivot/Camera3D" unique_id=893503172]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+target_position = Vector3(0, 0, -10)
+debug_shape_thickness = 5
+
+[node name="Block Placer" type="Node3D" parent="Camera Pivot/Camera3D" unique_id=130978049]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9)
+
+[node name="Block Breaker" type="Node3D" parent="Camera Pivot/Camera3D" unique_id=216428391]

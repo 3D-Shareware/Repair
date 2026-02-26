@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://na1bens1t2h1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y7hob"]
+
+[node name="Standard Block Collision" type="StaticBody3D" unique_id=1754204753]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2125252844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_y7hob")
+debug_color = Color(0, 7.645667, 8.798288, 1)

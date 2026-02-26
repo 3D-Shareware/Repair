@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c8od4yk3svpbd"]
+
+[ext_resource type="Script" uid="uid://que3yf4so32f" path="res://objects/block_particle.gd" id="1_08uyg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_08uyg"]
+vertex_color_use_as_albedo = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_a81ro"]
+material = SubResource("StandardMaterial3D_08uyg")
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="Gradient" id="Gradient_08uyg"]
+colors = PackedColorArray(0.19793725, 0.19793722, 0.19793722, 1, 0.7539839, 0.75398386, 0.75398386, 1)
+
+[node name="Block Particle" type="CPUParticles3D" unique_id=1882245575]
+emitting = false
+amount = 16
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+mesh = SubResource("BoxMesh_a81ro")
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, -18, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+color = Color(0.18, 0.108600006, 0.054000005, 1)
+color_initial_ramp = SubResource("Gradient_08uyg")
+script = ExtResource("1_08uyg")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

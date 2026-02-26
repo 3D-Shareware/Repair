@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dd77vm5jsu8pd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_airij"]
+transparency = 1
+albedo_color = Color(1, 1, 0, 0.49411765)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cmx4r"]
+material = SubResource("StandardMaterial3D_airij")
+size = Vector3(2, 2, 2)
+
+[node name="Target Block" type="MeshInstance3D" unique_id=1510836674]
+mesh = SubResource("BoxMesh_cmx4r")

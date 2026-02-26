@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://babutqch7g5mf"]
+
+[ext_resource type="Texture2D" uid="uid://vmj06uchodie" path="res://assets/ui/versatile_black_pixel.png" id="1_6jyqw"]
+[ext_resource type="Script" uid="uid://cml6btylcubpo" path="res://objects/screen_darkener.gd" id="2_g18pj"]
+
+[sub_resource type="Animation" id="Animation_g18pj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_6jyqw"]
+resource_name = "darken"
+length = 2.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1.25, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g18pj"]
+_data = {
+&"RESET": SubResource("Animation_g18pj"),
+&"darken": SubResource("Animation_6jyqw")
+}
+
+[node name="Screen Darkener" type="Sprite2D" unique_id=1662481672]
+visible = false
+z_index = 3
+scale = Vector2(1152, 648)
+texture = ExtResource("1_6jyqw")
+script = ExtResource("2_g18pj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1607961697]
+libraries/ = SubResource("AnimationLibrary_g18pj")
