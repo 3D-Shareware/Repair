@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bivftjrga70h2"]
+
+[ext_resource type="PackedScene" uid="uid://bookfpv1uc07a" path="res://assets/blocks/grass.glb" id="1_w84tx"]
+[ext_resource type="PackedScene" uid="uid://bp1fw6ybwccc5" path="res://assets/blocks/dirt.glb" id="2_yl12q"]
+[ext_resource type="PackedScene" uid="uid://dq6vcvchrysqm" path="res://assets/blocks/brick.glb" id="3_eyd0j"]
+[ext_resource type="PackedScene" uid="uid://v7jp26s476rd" path="res://assets/blocks/planks.glb" id="4_ht606"]
+[ext_resource type="PackedScene" uid="uid://cfpd6hxcn308n" path="res://assets/blocks/wood.glb" id="5_316fc"]
+[ext_resource type="PackedScene" uid="uid://bxkr6m6nytdp0" path="res://assets/blocks/leaves.glb" id="6_xino0"]
+[ext_resource type="PackedScene" uid="uid://bwxibjnd5mxyi" path="res://assets/blocks/stone.glb" id="7_e4bmj"]
+
+[node name="All Blocks" type="Node3D" unique_id=682527065]
+
+[node name="grass" parent="." unique_id=224513486 instance=ExtResource("1_w84tx")]
+
+[node name="dirt" parent="." unique_id=1714702428 instance=ExtResource("2_yl12q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="brick" parent="." unique_id=520295681 instance=ExtResource("3_eyd0j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="planks" parent="." unique_id=637446869 instance=ExtResource("4_ht606")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="wood" parent="." unique_id=1527871684 instance=ExtResource("5_316fc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+
+[node name="leaves" parent="." unique_id=490664746 instance=ExtResource("6_xino0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+
+[node name="stone" parent="." unique_id=2000603435 instance=ExtResource("7_e4bmj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
