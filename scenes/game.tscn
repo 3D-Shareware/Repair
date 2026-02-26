@@ -1,0 +1,398 @@
+[gd_scene format=3 uid="uid://dtd422yinc028"]
+
+[ext_resource type="Script" uid="uid://dpvnxlj16siy6" path="res://scenes/game.gd" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cidkaes46njq6" path="res://assets/ui/block_cursor.glb" id="3_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://cjfg42x1hr6ek" path="res://objects/sun.tscn" id="4_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://beo36ajhvrpjv" path="res://objects/world_environment.tscn" id="5_gee14"]
+[ext_resource type="PackedScene" uid="uid://babutqch7g5mf" path="res://objects/screen_darkener.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://mgy8n311hvan" path="res://objects/win_camera_pivot.tscn" id="6_p57ef"]
+[ext_resource type="Texture2D" uid="uid://d27shg4ljpggx" path="res://assets/ui/crosshair_white.png" id="6_vtaks"]
+[ext_resource type="FontFile" uid="uid://dec5j7hb73dg7" path="res://assets/block_font.ttf" id="8_0tnpc"]
+[ext_resource type="Texture2D" uid="uid://2qvcnhk6luwl" path="res://assets/ui/blocks_left.png" id="9_vtaks"]
+[ext_resource type="Script" uid="uid://btxrmxbvbx2d8" path="res://scenes/repair.gd" id="10_dinhu"]
+[ext_resource type="Texture2D" uid="uid://dbggm2doyw7m6" path="res://assets/ui/time_left.png" id="10_kvpfn"]
+[ext_resource type="AudioStream" uid="uid://cia0roderhapx" path="res://audio/block_build_2.wav" id="12_dinhu"]
+[ext_resource type="AudioStream" uid="uid://bwpxl2xjmy68k" path="res://audio/block_break.wav" id="13_kvuet"]
+[ext_resource type="AudioStream" uid="uid://negberhyyemc" path="res://audio/block_build_correct.wav" id="14_ir15t"]
+[ext_resource type="AudioStream" uid="uid://c6ynykub6el4h" path="res://audio/Shining_Voxels.wav" id="14_trtic"]
+[ext_resource type="AudioStream" uid="uid://0djmk3lh3ve1" path="res://audio/fade.wav" id="16_ca42v"]
+
+[sub_resource type="Animation" id="Animation_kvpfn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_dinhu"]
+resource_name = "boing"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(4, 4), Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kvuet"]
+_data = {
+&"RESET": SubResource("Animation_kvpfn"),
+&"boing": SubResource("Animation_dinhu")
+}
+
+[sub_resource type="Animation" id="Animation_kvuet"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_ir15t"]
+resource_name = "boing_emergency"
+length = 0.25
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(6, 6), Vector2(3, 3), Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_ca42v"]
+resource_name = "boing_mid"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(5, 5), Vector2(3, 3), Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_trtic"]
+resource_name = "boing_tiny"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(4, 4), Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ir15t"]
+_data = {
+&"RESET": SubResource("Animation_kvuet"),
+&"boing_emergency": SubResource("Animation_ir15t"),
+&"boing_mid": SubResource("Animation_ca42v"),
+&"boing_tiny": SubResource("Animation_trtic")
+}
+
+[sub_resource type="Animation" id="Animation_vtaks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rysoc"]
+resource_name = "start"
+length = 3.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ssvqc"]
+_data = {
+&"RESET": SubResource("Animation_vtaks"),
+&"start": SubResource("Animation_rysoc")
+}
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_lnu2h"]
+
+[sub_resource type="Animation" id="Animation_ssvqc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Music:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_264po"]
+resource_name = "fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Music:volume_db")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -10.0, -20.0, -80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kice"]
+_data = {
+&"RESET": SubResource("Animation_ssvqc"),
+&"fade": SubResource("Animation_264po")
+}
+
+[node name="Game" type="Node3D" unique_id=946624698]
+script = ExtResource("1_uwrxv")
+
+[node name="Placement Indicator" type="Node3D" parent="." unique_id=104125779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 3, 0)
+
+[node name="block_cursor" parent="Placement Indicator" unique_id=857991166 instance=ExtResource("3_lbhrr")]
+
+[node name="Sun" parent="." unique_id=830447055 instance=ExtResource("4_u5sy4")]
+transform = Transform3D(0.98570347, -0.08424467, 0.14591606, 0, 0.8660252, 0.49999988, -0.16848938, -0.49285161, 0.8536441, 0, 0, 0)
+
+[node name="WorldEnvironment" parent="." unique_id=304703080 instance=ExtResource("5_gee14")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=193085229]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1216777231]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 1
+
+[node name="Controls" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1581440632]
+texture_filter = 1
+layout_mode = 0
+offset_top = 576.0
+offset_right = 4608.0
+offset_bottom = 768.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("8_0tnpc")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[center]Right click to build![/center]"
+
+[node name="Crosshair" type="Sprite2D" parent="CanvasLayer/Control" unique_id=2088367520]
+modulate = Color(1, 1, 1, 0.78431374)
+texture_filter = 1
+position = Vector2(576, 324)
+scale = Vector2(4, 4)
+texture = ExtResource("6_vtaks")
+
+[node name="Screen Darkener" parent="CanvasLayer/Control" unique_id=1662481672 instance=ExtResource("5_iywne")]
+position = Vector2(576, 324)
+
+[node name="Blocks Left Img" type="Sprite2D" parent="CanvasLayer/Control" unique_id=1675906240]
+texture_filter = 1
+position = Vector2(50.5, 596.9999)
+scale = Vector2(3, 3)
+texture = ExtResource("9_vtaks")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/Blocks Left Img" unique_id=942653199]
+libraries/ = SubResource("AnimationLibrary_kvuet")
+
+[node name="Blocks Left" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=617533518]
+texture_filter = 1
+layout_mode = 0
+offset_left = 34.0
+offset_top = 584.0
+offset_right = 634.0
+offset_bottom = 776.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("8_0tnpc")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "[right]20/20[/right]"
+
+[node name="Time Left Img" type="Sprite2D" parent="CanvasLayer/Control" unique_id=848269049]
+texture_filter = 1
+position = Vector2(1101.5, 597.5)
+scale = Vector2(3, 3)
+texture = ExtResource("10_kvpfn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/Time Left Img" unique_id=1503136192]
+libraries/ = SubResource("AnimationLibrary_ir15t")
+
+[node name="Time Left" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=1133464824]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1027.0
+offset_top = 584.0
+offset_right = 1219.0
+offset_bottom = 776.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("8_0tnpc")
+theme_override_font_sizes/normal_font_size = 128
+bbcode_enabled = true
+text = "25"
+
+[node name="Repair" type="RichTextLabel" parent="CanvasLayer/Control" unique_id=189519298]
+visible = false
+texture_filter = 1
+layout_mode = 0
+offset_left = 1.0
+offset_top = 240.0
+offset_right = 4605.0
+offset_bottom = 608.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("8_0tnpc")
+theme_override_font_sizes/normal_font_size = 256
+bbcode_enabled = true
+text = "[center]Repair![/center]"
+script = ExtResource("10_dinhu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/Repair" unique_id=1271836153]
+libraries/ = SubResource("AnimationLibrary_ssvqc")
+
+[node name="Respawner" type="Area3D" parent="." unique_id=1739838749]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -64, 0)
+collision_layer = 0
+collision_mask = 3
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Respawner" unique_id=1121037621]
+shape = SubResource("WorldBoundaryShape3D_lnu2h")
+
+[node name="Win Camera Pivot" parent="." unique_id=1282480030 instance=ExtResource("6_p57ef")]
+
+[node name="Win Anim Timer" type="Timer" parent="." unique_id=1833095689]
+wait_time = 1.25
+one_shot = true
+
+[node name="Lose Anim Timer" type="Timer" parent="." unique_id=1774885757]
+wait_time = 1.25
+one_shot = true
+
+[node name="Time Left Timer" type="Timer" parent="." unique_id=1374913535]
+
+[node name="Next Game Timer" type="Timer" parent="." unique_id=1746652534]
+wait_time = 10.0
+
+[node name="World Breaking Timer" type="Timer" parent="." unique_id=1335487223]
+wait_time = 0.3
+
+[node name="Build" type="AudioStreamPlayer" parent="." unique_id=555789529]
+stream = ExtResource("12_dinhu")
+volume_db = 3.0
+
+[node name="Break" type="AudioStreamPlayer" parent="." unique_id=836102542]
+stream = ExtResource("13_kvuet")
+volume_db = 3.0
+
+[node name="Build Correct" type="AudioStreamPlayer" parent="." unique_id=1616435480]
+stream = ExtResource("14_ir15t")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=924400252]
+stream = ExtResource("14_trtic")
+
+[node name="Fade" type="AnimationPlayer" parent="Music" unique_id=694921649]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_1kice")
+
+[node name="Fader" type="AudioStreamPlayer" parent="." unique_id=1898323217]
+stream = ExtResource("16_ca42v")
+volume_db = -5.0
+
+[connection signal="body_entered" from="Respawner" to="." method="_on_respawner_body_entered"]
+[connection signal="timeout" from="Win Anim Timer" to="." method="_on_win_anim_timer_timeout"]
+[connection signal="timeout" from="Lose Anim Timer" to="." method="_on_lose_anim_timer_timeout"]
+[connection signal="timeout" from="Time Left Timer" to="." method="_on_time_left_timer_timeout"]
+[connection signal="timeout" from="Next Game Timer" to="." method="_on_next_game_timer_timeout"]
+[connection signal="timeout" from="World Breaking Timer" to="." method="_on_world_breaking_timer_timeout"]
